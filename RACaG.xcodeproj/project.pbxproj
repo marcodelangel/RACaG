@@ -96,6 +96,7 @@
 				TargetAttributes = {
 					FD7E5F451E593B0F003B0131 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7F57CHRFYP;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -258,6 +259,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7F57CHRFYP;
 				INFOPLIST_FILE = RACaG/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DPP.RACaG;
@@ -270,6 +272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7F57CHRFYP;
 				INFOPLIST_FILE = RACaG/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DPP.RACaG;
@@ -297,6 +300,7 @@
 				FD7E5F5A1E593B11003B0131 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
