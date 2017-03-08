@@ -52,7 +52,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="backButton"/>
                     <connections>
-                        <action selector="goBack" destination="-1" eventType="touchUpInside" id="ThJ-Rx-oO7"/>
+                        <action selector="goBack" destination="-1" eventType="touchUpInside" id="c1o-NK-zIF"/>
                     </connections>
                 </button>
             </subviews>

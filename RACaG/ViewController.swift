@@ -9,11 +9,6 @@
 import UIKit
 import AVFoundation
 
-protocol ImageViewControllerDelegate {
-    func takePicture() -> UIImage
-    func goBack()
-}
-
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let myPicker = UIImagePickerController()
@@ -27,8 +22,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidAppear(animated)
         
         let overlay = imagesViewController(nibName:"imagesViewController", bundle: nil)
-
-        overlay.delegate = self
         
         if (UIImagePickerController.isSourceTypeAvailable(.camera)){
             myPicker.delegate = self
@@ -58,41 +51,4 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
-}
-
-extension ViewController : ImageViewControllerDelegate {
-    func takePicture() -> UIImage {
-        let imageSize = UIScreen.main.bounds.size as CGSize;
-        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
-        let context = UIGraphicsGetCurrentContext()
-        for obj : AnyObject in UIApplication.shared.windows {
-            if let window = obj as? UIWindow {
-                if window.responds(to: #selector(getter: UIWindow.screen)) || window.screen == UIScreen.main {
-                    // so we must first apply the layer's geometry to the graphics context
-                    context!.saveGState();
-                    // Center the context around the window's anchor point
-                    context!.translateBy(x: window.center.x, y: window.center
-                        .y);
-                    // Apply the window's transform about the anchor point
-                    context!.concatenate(window.transform);
-                    // Offset by the portion of the bounds left of and above the anchor point
-                    context!.translateBy(x: -window.bounds.size.width * window.layer.anchorPoint.x,
-                                         y: -window.bounds.size.height * window.layer.anchorPoint.y);
-                    
-                    // Render the layer hierarchy to the current context
-                    window.layer.render(in: context!)
-                    
-                    // Restore the context
-                    context!.restoreGState();
-                }
-            }
-        }
-        let image = UIGraphicsGetImageFromCurrentImageContext();
-        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
-       
-        return image!
-    }
-    func goBack() {
-    self.imagePickerControllerDidCancel(myPicker)
-    }
 }
