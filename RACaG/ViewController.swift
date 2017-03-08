@@ -7,62 +7,92 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ViewController: UIViewController {
+protocol ImageViewControllerDelegate {
+    func takePicture() -> UIImage
+    func goBack()
+}
 
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    let myPicker = UIImagePickerController()
+    var parentVC:TableViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func handlePan(recognizer:UIPanGestureRecognizer){
-        let translation = recognizer.translation(in: self.view)
-        if let view = recognizer.view{
-            view.center = CGPoint(x:view.center.x + translation.x,
-                                  y:view.center.y + translation.y)
-        }
-    recognizer.setTranslation(CGPoint.zero, in: self.view)
-        
-        if recognizer.state == UIGestureRecognizerState.ended{
-            let velocity = recognizer.velocity(in: self.view)
-            let magnitude = sqrt((velocity.x * velocity.x)+(velocity.y * velocity.y))
-            let slideMultiplier = magnitude / 600
-            
-            let slideFactor = 0.1 * slideMultiplier
-            
-            var finalPoint = CGPoint(x:recognizer.view!.center.x + (velocity.x * slideFactor),
-                                     y:recognizer.view!.center.y + (velocity.y * slideFactor))
-            
-            finalPoint.x = min(max(finalPoint.x, 0), self.view.bounds.size.width)
-            finalPoint.y = min(max(finalPoint.y, 0), self.view.bounds.size.height)
-            
-            UIView.animate(withDuration: Double(slideFactor * 2),
-                           delay: 0,
-                           options: UIViewAnimationOptions.curveEaseOut,
-                           animations: {recognizer.view!.center = finalPoint},
-                           completion: nil)
-        }
-        
     }
     
-    @IBAction func handlePinch(recognizer : UIPinchGestureRecognizer){
-        if let view = recognizer.view {
-            view.transform = CGAffineTransform.init(scaleX: recognizer.scale, y: recognizer.scale)
-            recognizer.scale = 1
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let overlay = imagesViewController(nibName:"imagesViewController", bundle: nil)
+
+        overlay.delegate = self
+        
+        if (UIImagePickerController.isSourceTypeAvailable(.camera)){
+            myPicker.delegate = self
+            myPicker.sourceType = .camera
+            myPicker.showsCameraControls = false
+            myPicker.cameraOverlayView = overlay.view
+            
+            let screenSize:CGSize = UIScreen.main.bounds.size
+            let ratio:CGFloat = 4.0 / 3.0
+            let cameraHeight:CGFloat = screenSize.width * ratio
+            let scale:CGFloat = screenSize.height / cameraHeight
+            
+            myPicker.cameraViewTransform = CGAffineTransform(translationX: 0, y: (screenSize.height - cameraHeight) / 2.0)
+            myPicker.cameraViewTransform = myPicker.cameraViewTransform.scaledBy(x: scale, y: scale)
+            
+            self.present(myPicker, animated: true, completion: nil)
         }
     }
-
-    @IBAction func handleRotate(recognizer : UIRotationGestureRecognizer){
-        if let view = recognizer.view{
-            view.transform = CGAffineTransform.init(rotationAngle: recognizer.rotation)
-            recognizer.rotation = 0
-        }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
 }
 
+extension ViewController : ImageViewControllerDelegate {
+    func takePicture() -> UIImage {
+        let imageSize = UIScreen.main.bounds.size as CGSize;
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        for obj : AnyObject in UIApplication.shared.windows {
+            if let window = obj as? UIWindow {
+                if window.responds(to: #selector(getter: UIWindow.screen)) || window.screen == UIScreen.main {
+                    // so we must first apply the layer's geometry to the graphics context
+                    context!.saveGState();
+                    // Center the context around the window's anchor point
+                    context!.translateBy(x: window.center.x, y: window.center
+                        .y);
+                    // Apply the window's transform about the anchor point
+                    context!.concatenate(window.transform);
+                    // Offset by the portion of the bounds left of and above the anchor point
+                    context!.translateBy(x: -window.bounds.size.width * window.layer.anchorPoint.x,
+                                         y: -window.bounds.size.height * window.layer.anchorPoint.y);
+                    
+                    // Render the layer hierarchy to the current context
+                    window.layer.render(in: context!)
+                    
+                    // Restore the context
+                    context!.restoreGState();
+                }
+            }
+        }
+        let image = UIGraphicsGetImageFromCurrentImageContext();
+        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+       
+        return image!
+    }
+    func goBack() {
+    self.imagePickerControllerDidCancel(myPicker)
+    }
+}

@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0RM-jD-lAm">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RACaG" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="child" id="BYZ-38-t0r" customClass="ViewController" customModule="RACaG" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,83 +20,61 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="birrete" translatesAutoresizingMaskIntoConstraints="NO" id="ZZp-Xn-DE1">
-                                <rect key="frame" x="143" y="56" width="148" height="114"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="148" id="dWp-y2-tXO"/>
-                                    <constraint firstAttribute="height" constant="114" id="s1t-dv-eEr"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="XaA-en-2ds" appends="YES" id="PaN-zr-reu"/>
-                                    <outletCollection property="gestureRecognizers" destination="brU-CB-tcb" appends="YES" id="Bpo-i7-CeX"/>
-                                    <outletCollection property="gestureRecognizers" destination="CTo-9h-T3n" appends="YES" id="TR9-vO-GL2"/>
-                                </connections>
-                            </imageView>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="titulo" translatesAutoresizingMaskIntoConstraints="NO" id="BXZ-su-NJX">
-                                <rect key="frame" x="80" y="294" width="160" height="77"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="77" id="ygk-CV-fhh"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="BNj-MC-hBB" appends="YES" id="SBm-aP-mwQ"/>
-                                </connections>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="ZZp-Xn-DE1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="36" id="fmI-Qc-w0W"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZZp-Xn-DE1" secondAttribute="trailing" constant="13" id="h8y-pq-Gye"/>
-                            <constraint firstItem="BXZ-su-NJX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iQC-Qf-00B"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BXZ-su-NJX" secondAttribute="bottom" constant="197" id="rxU-lD-0ij"/>
-                            <constraint firstItem="BXZ-su-NJX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="64" id="xV1-8m-NYr"/>
-                        </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="bxw-qO-8Qx" appends="YES" id="SLw-HY-RJ2"/>
-                            <outletCollection property="gestureRecognizers" destination="exd-rE-aaI" appends="YES" id="6Qx-dB-upb"/>
-                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="XaA-en-2ds">
-                    <connections>
-                        <action selector="handlePanWithRecognizer:" destination="BYZ-38-t0r" id="gSZ-fe-dqq"/>
-                    </connections>
-                </panGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="BNj-MC-hBB">
-                    <connections>
-                        <action selector="handlePanWithRecognizer:" destination="BYZ-38-t0r" id="g22-Ur-c9z"/>
-                    </connections>
-                </panGestureRecognizer>
-                <pinchGestureRecognizer id="brU-CB-tcb">
-                    <connections>
-                        <action selector="handlePinchWithRecognizer:" destination="BYZ-38-t0r" id="11V-23-zhF"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <pinchGestureRecognizer id="bxw-qO-8Qx">
-                    <connections>
-                        <action selector="handlePinchWithRecognizer:" destination="BYZ-38-t0r" id="UnB-ce-eSf"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <rotationGestureRecognizer id="CTo-9h-T3n">
-                    <connections>
-                        <action selector="handleRotateWithRecognizer:" destination="BYZ-38-t0r" id="Sqn-op-lJF"/>
-                    </connections>
-                </rotationGestureRecognizer>
-                <rotationGestureRecognizer id="exd-rE-aaI">
-                    <connections>
-                        <action selector="handleRotateWithRecognizer:" destination="BYZ-38-t0r" id="sMZ-Gv-exq"/>
-                    </connections>
-                </rotationGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-78.75" y="138.38028169014083"/>
+            <point key="canvasLocation" x="1.875" y="136.26760563380282"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="VeS-d3-iQ0">
+            <objects>
+                <tableViewController id="VnE-Da-RbK" customClass="TableViewController" customModule="RACaG" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="v8n-Hq-g9k">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="pxq-gK-qPe">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="reuseIdentifier" tableViewCell="pxq-gK-qPe" id="dkh-aL-tV4">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="stages" id="a7p-yN-f0z"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VnE-Da-RbK" id="jIY-AX-rwN"/>
+                            <outlet property="delegate" destination="VnE-Da-RbK" id="Rux-KT-HqH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="nbF-oK-y6T"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ey-H9-Etp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-810" y="138"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Glz-Jn-kKW">
+            <objects>
+                <navigationController id="0RM-jD-lAm" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PZc-Fa-6le">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VnE-Da-RbK" kind="relationship" relationship="rootViewController" id="Stl-t1-02N"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IyX-5f-yte" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1674" y="138"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="birrete" width="762" height="500"/>
-        <image name="titulo" width="750" height="375"/>
-    </resources>
 </document>
